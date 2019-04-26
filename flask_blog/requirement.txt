@@ -1,0 +1,7 @@
+Flask==1.0.2
+flask-blueprint==1.2.7
+Flask-Script==2.0.6
+Flask-Session==0.3.1
+Flask-SQLAlchemy==2.3.2
+redis==3.2.1
+pymysql
