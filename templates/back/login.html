@@ -29,12 +29,15 @@
 <div class="container">
   <div class="siteIcon"><img src="/static/back/images/icon/icon.png" alt="" data-toggle="tooltip" data-placement="top" title="可能是你最喜欢的博客" draggable="false" /></div>
   <form action="" method="post" autocomplete="off" class="form-signin">
-      <h2 class="form-signin-heading">超级管理员登录</h2>{{ error }}
+      {{ error }}
+      <h2 class="form-signin-heading">超级管理员登录</h2>
+      <p><a href="{{ url_for('back.register') }}">注册</a></p>
       <label for="userName" class="sr-only">账号</label>
       <input type="text" id="userName" name="username" class="form-control" placeholder="请输入用户名" required autofocus autocomplete="off" maxlength="10">
       <label for="userPwd" class="sr-only">密码</label>
       <input type="password" id="userPwd" name="password" class="form-control" placeholder="请输入密码" required autocomplete="off" maxlength="18">
       <button class="btn btn-lg btn-primary btn-block" type="submit" id="signinSubmit">猛捶登录</button>
+
   </form>
 
 </div>
