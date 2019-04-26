@@ -9,6 +9,9 @@ from back.views import back_blue
 from web.views import web_blue
 
 app = Flask(__name__)
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('web/index.html')
 # 配置路由（前后台分开）
 app.register_blueprint(blueprint=back_blue,url_prefix='/back')  # 注册蓝图，url_prefix指定路径前缀
 app.register_blueprint(blueprint=web_blue,url_prefix='/web')
