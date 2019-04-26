@@ -9,17 +9,12 @@ from back.views import back_blue
 from web.views import web_blue
 
 app = Flask(__name__)
-<<<<<<< HEAD
-@app.route('/', methods=['GET'])
-def index():
-    return render_template('web/index.html')
-=======
 
 @app.route('/', methods=['GET'])
 def index():
     return render_template('web/index.html')
 
->>>>>>> bf15910e14b10b4fcd33da143e96d7362334cbd8
+
 # 配置路由（前后台分开）
 app.register_blueprint(blueprint=back_blue,url_prefix='/back')  # 注册蓝图，url_prefix指定路径前缀
 app.register_blueprint(blueprint=web_blue,url_prefix='/web')
@@ -38,14 +33,7 @@ Session(app)
 db.init_app(app)
 
 
-
-<<<<<<< HEAD
-    manager.run()
-=======
-
-
-
 if __name__ == '__main__':
     manager = Manager(app)
     manager.run()
->>>>>>> bf15910e14b10b4fcd33da143e96d7362334cbd8
+
