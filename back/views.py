@@ -179,17 +179,17 @@ def update_article(id):
         types = ArticleType.query.all()
         return render_template('back/update-article.html', types=types)
     if request.method == 'POST':
-        a_article = Article.query.get(id)
+        art = Article.query.get(id)
         ctitle = request.form.get('g_title')
         ccontent = request.form.get('g_content')
         cdesc = request.form.get('g_desc')
         ccategory = request.form.get('g_category')
         if ctitle and cdesc and ccontent or ccategory:   # bug 不全部选中无法提交， 分类必须要选中
-            a_article.title = ctitle
-            a_article.content = ccontent
-            a_article.desc = cdesc
-            a_article.category = ccategory
-            a_article.save()
+            art.title = ctitle
+            art.content = ccontent
+            art.desc = cdesc
+            art.type = ccategory
+            art.save()
             return redirect(url_for('back.article'))
 
 

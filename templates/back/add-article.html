@@ -37,8 +37,8 @@
                             {% for type in types %}
                             <li>
                                 <label>
-                                    <input name="category" type="radio" value="" checked>
-                                    {{ type.t_name }} <em class="hidden-md">( 分类ID: <span>{{ type.id }}</span>
+                                    <input name="category" type="radio" value="{{ type.id }}" checked>
+                                    {{ type.t_name }} <em class="hidden-md">( 分类ID: <span></span>
                                     )</em></label>
                             </li>
                             {% endfor %}
