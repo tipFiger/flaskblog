@@ -7,12 +7,12 @@
 
 {% block content %}
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
-      <form action="/Flink/checkAll" method="post" >
+      <form action="" method="post" >
         <h1 class="page-header">操作</h1>
         <ol class="breadcrumb">
-          <li><a href="add-flink.html">增加友情链接</a></li>
+          <li><a href="{{ url_for('back.add_flink') }}">增加友情链接</a></li>
         </ol>
-        <h1 class="page-header">管理 <span class="badge">1</span></h1>
+        <h1 class="page-header">管理 <span class="badge"></span></h1>
         <div class="table-responsive">
           <table class="table table-striped table-hover">
             <thead>
@@ -24,12 +24,14 @@
               </tr>
             </thead>
             <tbody>
+              {% for flink in flinks %}
               <tr>
                 <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-                <td class="article-title">异清轩</td>
-                <td>http://www.ylsat.com</td>
-                <td><a href="update-flink.html">修改</a> <a rel="6">删除</a></td>
+                <td class="article-title">{{ flink.lname }}</td>
+                <td>{{ flink.lurl }}</td>
+                <td><a href="{{ url_for('back.update_flink', id=flink.id) }}">修改</a> <a href="{{ url_for('back.del_flink', id=flink.id) }}" rel="6">删除</a></td>
               </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
@@ -51,6 +53,8 @@
       </form>
     </div>
 {% endblock %}
+
+
 
 {% block js2 %}
 <script src="/static/back/js/bootstrap.min.js"></script>

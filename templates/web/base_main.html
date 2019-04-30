@@ -58,10 +58,6 @@
 <!--});-->
 <!--});-->
 <!--</script>-->
-
-<script type="text/javascript">
-    jQuery(document).ready(function($){$("html,body").click(function(e){var n=Math.round(Math.random()*100);var $i=$("<b/>").text("+"+n);var x=e.pageX,y=e.pageY;$i.css({"z-index":99999,"top":y-20,"left":x,"position":"absolute","color":"#E94F06"});$("body").append($i);$i.animate({"top":y-180,"opacity":0},1500,function(){$i.remove();});e.stopPropagation();});});
-</script>
 {% endblock %}
 
 {% block header %}
@@ -72,10 +68,10 @@
             <ul id="starlist">
                 <li><a href="{{ url_for('web.index') }}">网站首页</a></li>
                 <!--<li><a href="share.html">我的相册</a></li>-->
-                <li><a href="{{ url_for('web.a_list') }}">我的文章</a></li>
+                <li><a href="{{ url_for('web.a_list') }}">文章</a></li>
+                <li><a href="{{ url_for('web.info') }}">热点</a></li>
                 <li><a href="{{ url_for('web.about') }}">关于我</a></li>
-                <!--<li><a href="gbook.html">留言</a></li>-->
-                <li><a href="{{ url_for('web.info') }}">本站热点</a></li>
+                <li><a href="{{ url_for('web.share') }}">相册</a></li>
                 <!--<li><a href="infopic.html">照片详情</a></li>-->
             </ul>
         </nav>

@@ -27,3 +27,8 @@ def a_list():
 
 
 
+@web_blue.route('/share/', methods=['GET'])
+def share():
+    return render_template('web/share.html')
+
+

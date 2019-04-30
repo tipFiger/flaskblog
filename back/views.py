@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, sessio
 # 密码的编码与解码
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from back.models import User, ArticleType, db, Article
+from back.models import User, ArticleType, db, Article, Notice, Flink
 from utils.functools import is_login
 
 back_blue = Blueprint('back', __name__)  # 实例化蓝图
@@ -202,18 +202,105 @@ def del_article(id):
 
 
 #############################
-# 仅仅跳转暂未添加功能
+# 公告功能
 @back_blue.route('/notice/', methods=['GET','POST'])
 def notice():
-    return render_template('back/notice.html')
+    if request.method == 'GET':
+        notices = Notice.query.all()
+        return render_template('back/notice.html', notices=notices)
 
-@back_blue.route('/comment/', methods=['GET','POST'])
-def comment():
-    return render_template('back/comment.html')
+# 添加公告
+@back_blue.route('/add_notice/', methods=['GET','POST'])
+def add_notice():
+    if request.method == 'GET':
+        return render_template('back/add-notice.html')
+    if request.method == 'POST':
+        notice = Notice()
+        notice.title = request.form.get('title')
+        notice.content = request.form.get('content')
+        db.session.add(notice)
+        db.session.commit()
+        return redirect(url_for('back.notice'))
+    return render_template('back/add-notice.html',error='请填写完整信息')
 
+#  删除公告
+@back_blue.route('/del_notice/<int:id>/',methods=['GET','POST'])
+def del_notice(id):
+    notice = Notice.query.get(id)
+    db.session.delete(notice)
+    db.session.commit()
+    return redirect(url_for('back.notice'))
+
+# 更新公告
+@back_blue.route('/update_notice/<int:id>/',methods=['GET','POST'])
+def update_notice(id):
+    if request.method == 'GET':
+        return render_template('back/update-notice.html')
+    if request.method == 'POST':
+        notice = Notice.query.get(id)
+        utitle = request.form.get('title')
+        ucontent = request.form.get('content')
+        if utitle or ucontent:
+            notice.title = utitle
+            notice.content = ucontent
+            db.session.add(notice)
+            db.session.commit()
+            return redirect(url_for('back.notice'))
+        else:
+            return render_template('back/update-notice.html',error='请填写完整信息')
+
+
+# ###############################
+# 友情连接功能
 @back_blue.route('/flink/', methods=['GET','POST'])
 def flink():
-    return render_template('back/flink.html')
+    if request.method == 'GET':
+        flinks = Flink.query.all()
+        return render_template('back/flink.html', flinks=flinks)
+
+
+# 添加链接
+@back_blue.route('/add_flink/', methods=['GET','POST'])
+def add_flink():
+    if request.method == 'GET':
+        return render_template('back/add-flink.html')
+    if request.method == 'POST':
+        flink = Flink()
+        flink.lname = request.form.get('name')
+        flink.lurl = request.form.get('url')
+        db.session.add(flink)
+        db.session.commit()
+        return redirect(url_for('back.flink'))
+#
+# # 删除链接
+@back_blue.route('/del_flink/<int:id>/',methods=['GET','POST'])
+def del_flink(id):
+    flink = Flink.query.get(id)
+    db.session.delete(flink)
+    db.session.commit()
+    return redirect(url_for('back.flink'))
+#
+# # 更新链接
+@back_blue.route('/update_flink/<int:id>/',methods=['GET','POST'])
+def update_flink(id):
+    if request.method == 'GET':
+        return render_template('back/update-flink.html')
+    if request.method == 'POST':
+        flink = Flink.query.get(id)
+        utitle = request.form.get('name')
+        ulurl = request.form.get('url')
+        if utitle or ulurl:
+            flink.lname = utitle
+            flink.lurl = ulurl
+            db.session.add(flink)
+            db.session.commit()
+            return redirect(url_for('back.flink'))
+        return render_template('back/update-flink.html', error='请填写完整信息')
+
+
+
+
+
 
 @back_blue.route('/loginlog/', methods=['GET','POST'])
 def loginlog():

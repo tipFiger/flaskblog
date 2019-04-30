@@ -54,6 +54,26 @@ class Article(db.Model):
 
 
 
+# 公告类
+class Notice(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String(50), nullable=False)
+    content = db.Column(db.TEXT, nullable=False)
+    create_time = db.Column(db.DateTime, default=datetime.now())
+    __tablename__ = 'notice'
+
+
+
+# 友情连接类
+class Flink(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    lname = db.Column(db.String(30), unique=True, nullable=False)
+    lurl = db.Column(db.String(255),unique=True, nullable=False)
+
+    __tablename_ = 'flink'
+
+
+
 
 
 

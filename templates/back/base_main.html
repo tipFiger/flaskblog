@@ -33,6 +33,7 @@
             </li>
             <li><a href="{{ url_for('back.logout')　}}" onClick="if(!confirm('是否确认退出？'))return false;">退出登录</a></li>
             <li><a data-toggle="modal" data-target="#WeChat">帮助</a></li>
+            <li><span class="glyphicon glyphicon-time"><b id="datetime" ></b></span></li>
           </ul>
           <form action="" method="post" class="navbar-form navbar-right" role="search">
             <div class="input-group">
@@ -55,7 +56,6 @@
       <ul class="nav nav-sidebar">
         <li class="active"><a href="{{ url_for('back.a_type') }}">文章分类</a></li>
         <li><a href="{{ url_for('back.notice') }}">公告</a></li>
-        <li><a href="{{ url_for('back.comment') }}">评论</a></li>
       </ul>
       <ul class="nav nav-sidebar">
         <li><a href="{{ url_for('back.article') }}">文章列表</a></li>
